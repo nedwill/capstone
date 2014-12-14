@@ -539,6 +539,7 @@ static void printOperand(MCInst *MI, unsigned OpNo, SStream *O)
 	MCOperand *Op  = MCInst_getOperand(MI, OpNo);
 	if (MCOperand_isReg(Op)) {
 		unsigned int reg = MCOperand_getReg(Op);
+		printf("Got register %d in printOperand.\n",reg);
 
 		printRegName(O, reg);
 		if (MI->csh->detail) {
