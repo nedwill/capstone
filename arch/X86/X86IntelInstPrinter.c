@@ -537,9 +537,12 @@ static void printPCRelImm(MCInst *MI, unsigned OpNo, SStream *O)
 static void printOperand(MCInst *MI, unsigned OpNo, SStream *O)
 {
 	MCOperand *Op  = MCInst_getOperand(MI, OpNo);
+	if (Op->MachineOperandType == kInvalid)
+	{
+		return;
+	}
 	if (MCOperand_isReg(Op)) {
 		unsigned int reg = MCOperand_getReg(Op);
-		printf("Got register %d in printOperand.\n",reg);
 
 		printRegName(O, reg);
 		if (MI->csh->detail) {
